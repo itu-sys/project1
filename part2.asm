@@ -49,23 +49,30 @@ generator:
     mov  [clmn],eax
 
     call print
+    call generate
+    mov eax,[arr1]
+    mov edx,[arr2]
+    mov [arr2],eax
+    mov [arr1],edx
+    ;call print
 
     pop  ebp
     ret
 
 print:
-    mov  ecx,1
+    mov  ecx,[line]
+    mov edi,[clmn]
     mov  eax,[arr1]
     mov [buf],eax
-    sub  [buf],ecx
+    sub  [buf],edi
     ploop_1:
-    add  [buf],ecx
+    add  [buf],edi
     push ecx
 
     mov  eax,SYS_WRITE
     mov  ebx,STDOUT
-    mov  ecx,[arr1]
-    mov  edx,25
+    mov  ecx,[buf]
+    mov  edx,[clmn]
     int  0x80
 
     mov  eax,SYS_WRITE
@@ -81,16 +88,16 @@ print:
 
 generate:
     mov eax,[arr1]
-    mov [loc],eax
+    mov [loc],eax       ; arr1 = loc
     mov eax,[line]
-    mul word[clmn]
-    mov ecx,eax
-    mov eax,1
-    mov ebx,1
+    mul word[clmn]      ; linexcolumn > eax
+    mov ecx,eax         ; 25 times loop
+    mov eax,1           ; current line < 1
+    mov ebx,1           ; current column < 1
     gloop_1:
     push ecx
     mov ecx,0
-    cmp eax,1
+    cmp eax,1           ; NESW > these compares for sides
     je swest
     cmp eax,[line]
     je seast

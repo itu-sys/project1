@@ -39,7 +39,7 @@ int main() {
     printf("%d\r\n", row);
     printf("%d\r\n", column);
 
-    generator(rule, inp, row, column);
+    generator(rule, input, row, column);
     return 0;
 }
 
