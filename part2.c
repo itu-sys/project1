@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int generator(int rule, char *sequence, int row, int column);  		// assembly fonksiyonu
+int generator(char* rule, char *sequence, int row, int column);  		// assembly fonksiyonu
 void simplify(char *raw, char *destination);
 int power(int base, int exponent);
 void simply(char *raw, char *row, char *column); 
@@ -26,13 +26,20 @@ int main() {
 	simplify(buf,inp);
 	strcat(input,inp);
 	k++;
-       
+
    }
-	printf("%s",input);
+        //printf("%s",input);
 	//generator(int rule, char *inp, int row, int column);
 	
     fclose(inputFile);
     fclose(ruleFile);
+
+    printf("%s\r\n", rule);
+    printf("%s\r\n", input);
+    printf("%d\r\n", row);
+    printf("%d\r\n", column);
+
+    generator(rule, inp, row, column);
     return 0;
 }
 
