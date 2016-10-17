@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int generator(int rule, char *sequence, int length, int generation);  		// assembly fonksiyonu
+int generator(int rule, char *sequence, int row, int column);  		// assembly fonksiyonu
 void simplify(char *raw, char *destination);
 int power(int base, int exponent);
 void simply(char *raw, char *row, char *column); 
@@ -20,14 +20,16 @@ int main() {
     inputFile = fopen("input2d.txt", "r"); 			
     fscanf(inputFile, "%d",&row );
     fscanf(inputFile, "%d",&column );
-    char buf[column*2],inp[column+1]; 
+    char buf[column*2],inp[column+1],input[100]=""; 
 	   
-   while(fgets(buf, column*2, inputFile))
+   while(fgets(buf, column*2, inputFile)){
 	simplify(buf,inp);
-	printf("%s",buf);
+	strcat(input,inp);
 	k++;
        
-
+   }
+	printf("%s",input);
+	//generator(int rule, char *inp, int row, int column);
 	
     fclose(inputFile);
     fclose(ruleFile);
